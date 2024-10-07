@@ -1,0 +1,38 @@
+version: "3"
+
+services:
+# V dev container
+  vlang:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8081:8081         
+    # Bind the entire parent directory to /v in container
+    volumes:
+      - type: bind
+        source: ..
+        target: /v
+    tty: true
+    
+# The database
+  postgres:
+    image: postgres
+    restart: always
+    expose:               # Only expose to other containers in the network
+      - 5432
+    environment:
+      POSTGRES_USER: "${POSTGRES_USER}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+      POSTGRES_URL: "${POSTGRES_URL}"
+
+# Database management tool in the browser
+  adminer:
+    image: adminer
+    restart: always
+    ports:                # Expose host port to container port, so it is reachable outside the docker network
+      - 8080:8080         
+    depends_on:
+      - database
+    environment:
+      ADMINER_DEFAULT_SERVER: "${POSTGRES_URL}"
