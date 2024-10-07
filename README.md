@@ -22,20 +22,26 @@ docker compose up -d
 docker compose down
 ```
 
-## Build and run without compose
+### Database
 
-```build_image.sh``` contains this simple build script to build the container image. It basically does the same as the docker compose build command above, except for mounting directories and opening a TTY to keep the container from exiting.
+Using docker compose also adds a Postgres database and Adminer (database management through web interface) containers. These use the ```.env``` file for some very simple configuration, setting the username and password. 
 
-```bash
-docker build . --progress=plain --no-cache -t devcontainer_vlang
-```
-
-## Database
-
-Using docker compose also adds a postgres database and adminer (database management through web interface) containers. These use the .env file for some very simple configuration, setting the username and password. The postgres URL uses the container name and port. If the postgres service is renamed in the compose file, then the postgres url must be updated in ```.env``` aswell.
+The ```POSTGRES_URL``` uses the container name and port. If the postgres service is renamed in ```docker-compose.yaml```, then the postgres url must be updated in ```.env``` aswell.
 
 ```plaintext
 POSTGRES_USER="test"
 POSTGRES_PASSWORD="test"
 POSTGRES_URL="database:5432"
 ```
+
+
+## Build and run without compose
+
+```build_image.sh``` contains this simple build script to build the container image. It basically does the same as the docker compose build command above, except for mounting directories and opening a TTY to keep the container from exiting.
+
+Building and running the image manually obviously does not include any database container or config like above.
+
+```bash
+docker build . --progress=plain --no-cache -t devcontainer_vlang
+```
+
