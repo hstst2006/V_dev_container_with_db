@@ -24,7 +24,7 @@ docker compose down
 
 ### Database
 
-Using docker compose also adds a Postgres database and Adminer (database management through web interface) containers. These use the ```.env``` file for some very simple configuration, setting the username and password. 
+Using docker compose also adds a Postgres database and Adminer (database management through web interface) containers. These use the ```.env``` file for some very simple configuration, setting the username and password.
 
 The ```POSTGRES_URL``` uses the container name and port. If the postgres service is renamed in ```docker-compose.yaml```, then the postgres url must be updated in ```.env``` aswell.
 
@@ -33,7 +33,6 @@ POSTGRES_USER="test"
 POSTGRES_PASSWORD="test"
 POSTGRES_URL="database:5432"
 ```
-
 
 ## Build and run without compose
 
@@ -44,4 +43,3 @@ Building and running the image manually obviously does not include any database 
 ```bash
 docker build . --progress=plain --no-cache -t devcontainer_vlang
 ```
-
