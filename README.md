@@ -6,7 +6,7 @@ This is a simple dev container for the V programming language using Ubuntu:24.10
 
 Docker compose will mount the local parent directory to the docker container's /v directory. Change ```volume.source``` in ```docker-compose.yaml``` to use another directory.
 
-When building I like to use the following arguments (both can be omitted):
+When building I like to use the following arguments for debugging purposes (both can be omitted):
 
 * ```--no-cache``` ignores cached steps and builds everything from scratch.
 * ```--progress=plain``` displays the log of what is going on, as well as the container output for the different build steps.
@@ -28,4 +28,14 @@ docker compose down
 
 ```bash
 docker build . --progress=plain --no-cache -t devcontainer_vlang
+```
+
+## Database
+
+Using docker compose also adds a postgres database and adminer (database management through web interface) containers. These use the .env file for some very simple configuration, setting the username and password. The postgres URL uses the container name and port. If the postgres service is renamed in the compose file, then the postgres url must be updated in ```.env``` aswell.
+
+```plaintext
+POSTGRES_USER="test"
+POSTGRES_PASSWORD="test"
+POSTGRES_URL="database:5432"
 ```
