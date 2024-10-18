@@ -43,3 +43,7 @@ Building and running the image manually obviously does not include any database 
 ```bash
 docker build . --progress=plain --no-cache -t devcontainer_vlang
 ```
+
+### Note on Adminer
+
+It runs unreliably and is no longer supported anyways, consider finding a better alternative.
