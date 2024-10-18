@@ -6,6 +6,8 @@ This is a simple dev container for the V programming language using Ubuntu:24.10
 
 Docker compose will mount the local parent directory to the docker container's /v directory. Change ```volume.source``` in ```docker-compose.yaml``` to use another directory.
 
+The commands in this section can also be found and run from ```compose_convenience_scripts```
+
 When building I like to use the following arguments for debugging purposes (both can be omitted):
 
 * ```--no-cache``` ignores cached steps and builds everything from scratch.
@@ -17,6 +19,9 @@ docker compose build --no-cache --progress=plain
 
 # Run the container in detatched mode (-d)
 docker compose up -d 
+
+# Attach and follow the logs
+docker compose logs -f
 
 # Stop the container
 docker compose down
