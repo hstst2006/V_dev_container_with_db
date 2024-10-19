@@ -29,7 +29,7 @@ docker compose down
 
 ### Database
 
-Using docker compose also adds a Postgres database and Adminer (database management through web interface) containers. These use the ```.env``` file for some very simple configuration, setting the username and password.
+Using docker compose also adds a Postgres database container. It uses the ```.env``` file for some very simple configuration, setting the username, password and database name.
 
 The ```POSTGRES_URL``` uses the container name and port. If the postgres service is renamed in ```docker-compose.yaml```, then the postgres url must be updated in ```.env``` aswell.
 
@@ -49,6 +49,19 @@ Building and running the image manually obviously does not include any database 
 docker build . --progress=plain --no-cache -t devcontainer_vlang
 ```
 
-### Note on Adminer
+### Accessing the database
 
-It runs unreliably and is no longer supported anyways, consider finding a better alternative.
+ Access the database using the CLI inside the postgres container:
+
+```bash
+# psql -d database_name username
+psql -d postgres test
+
+# Inside psql
+\l      # List databases
+\dn     # List schemas
+\dt     # List tables inside schemas
+
+# Connect to the database
+\c database name
+```

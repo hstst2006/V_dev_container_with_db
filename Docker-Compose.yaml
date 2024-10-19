@@ -23,14 +23,3 @@ services:
     expose:               # Only expose to other containers in the network
       - 5432
     env_file: ".env"
-
-# Database management tool in the browser
-  adminer:
-    image: adminer
-    restart: always
-    ports:                # Expose host port to container port, so it is reachable outside the docker network
-      - 8080:8080         
-    depends_on:
-      - postgres
-    environment:
-      ADMINER_DEFAULT_SERVER: "${POSTGRES_URL}:${POSTGRES_PORT}"
